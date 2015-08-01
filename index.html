@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Jera-stokosm by n1k0d49</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Jera-stokosm</h1>
+      <h2 class="project-tagline">Stokosm is an explorer for goals, projects and requirements, and their relations. It is part of the larger vision of Jera</h2>
+      <a href="https://github.com/n1k0d49/jera-stokosm" class="btn">View on GitHub</a>
+      <a href="https://github.com/n1k0d49/jera-stokosm/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/n1k0d49/jera-stokosm/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="jera-specs" class="anchor" href="#jera-specs" aria-hidden="true"><span class="octicon octicon-link"></span></a>jera-specs</h1>
+
+<p>Specs created for Jera in Checkvist. CC BY-NC license. Jera was in reality a bigger enterprise than what it's found here. To distinguish them this should be refered to as Jera Community Platform, also code-named 'stokosm' (from greek στόχος (aim) and κόσμος (order)).</p>
+
+<p>This is an idea called Jera. Ignore the "Community v1" as it's an old version. Also, I would check the "Data structure" section first to get an idea of what it is about. The overarching idea, reached after a lot of discussions and brain storming, is that the objective of the platform is to facilitate the purposeful creative process; and that this is divided in three main aspects:</p>
+
+<p>*Identifying the things that people want (i.e. specific goals"to
+improve society),
+*Finding ways of achieving these goals (through
+projects), and
+*Identifying and organizing the requirements of these projects.</p>
+
+<p>These correspond to the main data types, and each of them can be further sub-organized into categories, via tags (like transportation, health, IT, etc.), although these don't give the main structure (they are actually ancillary) to the system, but connections. So the proper way to implement a typical structure is to have a big goal called "Improving transportation" with a lot of children goals (more details about the type of connections in the document).</p>
+
+<p>The important thing is that people should find what they are looking for as readily as possible. However, most people don't know what to look for other than "improve the world", so having a way to explore ideas is useful. That is why we put a lot of emphasis on connections between ideas (which was inspired by some other guys working on something called "Rhizi" as well as a set of idea tools like this one: <a href="http://hackathonideas.tk/">http://hackathonideas.tk/</a>).</p>
+
+<p>People exploring the "goals section", whether in "list view" or "graph view", would be able to find the goals people are more interested in, as well as related goals. They will then find projects that people are proposing/working on to solve that goal, and also find the requisites that that project is looking for. Maybe they will even offer themselves for help if they have that requisite (could be a skill).</p>
+
+<p>Some other user could be exploring the "requisites section" directly, to look for things to help in, if they had a certain skill/resource they wanted to offer/use. They could even filter the requisites for requisites used for projects that are aimed to solving a certain goal, or goals.</p>
+
+<p>Basically, what we tried to design is the best way in which people with the intention of improving the world could find what they wanted to, no matter from which angle they came.</p>
+
+<p>For each of the "goals", "projects", "requisites", there is a corresponding page that holds information about it, as well as a "newsfeed" (a name that maybe isn't that good, as it reminds me of Facebook's) that basically has the "blog" and "discussion" features you talk about for the creative process (I actually put this "blog" and "discussion" features separately but a friend said maybe it's best together, although I am not convinced).</p>
+
+<p>So that people that want to discuss about a certain goal, will go to that goal's page (which will load the "newsfeed"/thread page) by default, and they will post a new thread, like in a forum, or they will search for threads (sorted by date or vote-ranking), and discuss in it etc.</p>
+
+<p>That should give an idea of what this is. The details are below</p>
+
+<h1>
+<a id="community-specification" class="anchor" href="#community-specification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community Specification</h1>
+
+<h2>
+<a id="top-bar" class="anchor" href="#top-bar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Top bar</h2>
+
+<h3>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span class="octicon octicon-link"></span></a>Links</h3>
+
+<p>Campaign</p>
+
+<p>Community</p>
+
+<p>Active projects</p>
+
+<p>User profile</p>
+
+<h2>
+<a id="community-v1" class="anchor" href="#community-v1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community v1</h2>
+
+<h3>
+<a id="news-feed" class="anchor" href="#news-feed" aria-hidden="true"><span class="octicon octicon-link"></span></a>News Feed</h3>
+
+<p>Display news, actions and posts from things and people you follow.</p>
+
+<p>Comments side bar</p>
+
+<ul>
+<li>Appears when clicking a newsfeed element</li>
+</ul>
+
+<h3>
+<a id="projectidea-explorer" class="anchor" href="#projectidea-explorer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project/Idea explorer</h3>
+
+<p>Categories</p>
+
+<ul>
+<li>Goals</li>
+<li>Projects</li>
+<li>Requirements ("Cogs")</li>
+</ul>
+
+<p>Graph View</p>
+
+<ul>
+<li>Connection Rules
+
+<ul>
+<li>IntraCategory Connections
+
+<ul>
+<li>Hierarchical Connections (Parent/Child)</li>
+<li>
+<strong>Child Node</strong> is contained within a <strong>Parent Node</strong> if they have a single Parent relationship.</li>
+<li>
+<strong>Child Node</strong> related to 2 or more <strong>Parent Nodes</strong> lies outside both parents but is connected by lines.</li>
+</ul>
+</li>
+<li>CrossCategory Connections
+
+<ul>
+<li>Non-Hierarchical</li>
+<li>Traced between <strong>Goals</strong> and <strong>Projects</strong>
+
+<ul>
+<li>A single <strong>Project</strong> can be connected to one or more Parent/Child <strong>Goals</strong>
+</li>
+</ul>
+</li>
+<li>Traced between <strong>Projects</strong> and <strong>Requirements</strong>
+
+<ul>
+<li>A single <strong>Project</strong> can be connected to one or more Parent/Child <strong>Goals</strong>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Filtering/Search Rules
+
+<ul>
+<li>Double Click/Drag-n-Drop on Node applies Filter to Intracategory and InterCategory views.</li>
+<li>Restricts view to nodes directly connected to the filter term/node.</li>
+<li>Keyword filtering/search
+
+<ul>
+<li>Keyword/Tag Search in <strong>section search bar</strong> which is on the graph/list view. This search bar can also be selected by pressing Ctrl+F</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Views
+
+<ul>
+<li>Single Category</li>
+<li>Goal+Project View</li>
+<li>Global View (Goals+Projects+Requirements)</li>
+</ul>
+</li>
+<li>Display Rules
+
+<ul>
+<li>Minimum Node Display Size (So new nodes may appear upon zooming)</li>
+<li>Maximum Connections (10 highest ranking)
+
+<ul>
+<li>Maybe there's a way to navigate through further connections, maybe some "More connections" button will display the next 10 connections under the ranking.</li>
+</ul>
+</li>
+<li>Node Size dependent on <strong>Ranking</strong>
+</li>
+</ul>
+</li>
+<li>Ranking Rules
+
+<ul>
+<li>Newest</li>
+<li>Trending (Growth speed) TBC</li>
+<li>Popularity (Average Rating) (Maybe, takes into account rating of children nodes) TBC</li>
+</ul>
+</li>
+<li>Actions
+
+<ul>
+<li>Choose Ranking system
+
+<ul>
+<li>The kind of ranking is selected from a drop-down menu on the top.</li>
+</ul>
+</li>
+<li>New Connections
+
+<ul>
+<li>Initiated by Drag-n-Drop across any node.
+
+<ul>
+<li>Drag existing node to another existing node establishes connection. For interCategory connections see Actions-&gt;New Project.</li>
+<li>Drag existing node to empty space establishes connection to a new node in destination space. This will prompt you with an input box to name the new node, unless the new node is in a different category, in which case the New Project page opens (See Actions-&gt;New Project).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>New Goals or Requirements
+
+<ul>
+<li>"Add Goal/Requirement" Text Box</li>
+<li>Can be added to the requirement pool without connections initially.</li>
+<li>If filter is applied, filtering nodes are automatically connected to new nodes.</li>
+</ul>
+</li>
+<li>New Project
+
+<ul>
+<li>New Project Submission system</li>
+<li>Also initiated when making a cross category connection, with the nodes involved in the new connection already included in the "New Project". If making connection to an empty space, obviously only one node will be initially connected to the "New Project".</li>
+</ul>
+</li>
+<li>Navigation
+
+<ul>
+<li>Left click and drag to pan around</li>
+<li>Scroll to zoom in and out. A zooming slider is also available.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>List view (Default view (TBC))</p>
+
+<ul>
+<li>Visually, it could be displayed as a list, or as a grid of elements.</li>
+<li>Displays same hierarchy described in "Graph View", by listing children in a sub-branch in a tree-like structure. Elements with more than one parent will appear duplicated (below each parent) in this view.</li>
+<li>Actions
+
+<ul>
+<li>Follow Node element</li>
+<li>Create new Node element</li>
+<li>All actions in the graph view which are compatible with this view</li>
+</ul>
+</li>
+</ul>
+
+<p>Wiki/Discussion side-window</p>
+
+<ul>
+<li>Wiki-like collaborative description of object followed by list of Discussion threads on top division</li>
+<li>Tags of selected object also appear here</li>
+<li>Appears when clicking on a node/object (Goal, Project, Requirement) wether in Graph or List view</li>
+<li>Disappear if clicking outside highlighted node, or if clicking some "back arrow" button.</li>
+<li>Comments for the selected section/discussion thread in bottom division</li>
+</ul>
+
+<h3>
+<a id="user" class="anchor" href="#user" aria-hidden="true"><span class="octicon octicon-link"></span></a>User</h3>
+
+<p>Profile page</p>
+
+<p>Associated resources and skills (requisites in general)</p>
+
+<p>Short bio/contact info etc.</p>
+
+<p>Projects in which it has participated</p>
+
+<p>Affiliation tags</p>
+
+<h2>
+<a id="community-v2" class="anchor" href="#community-v2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community v2</h2>
+
+<h3>
+<a id="the-communityprojectxplorer-webapp" class="anchor" href="#the-communityprojectxplorer-webapp" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Community/ProjectXplorer webapp</h3>
+
+<p>The webapp is mainly structured into a Toolbar, a Main Panel, a Connections Bar, and a Preview Sidebar.</p>
+
+<p><strong>Toolbar</strong></p>
+
+<ul>
+<li>Situated on top</li>
+<li>Contains:
+
+<ul>
+<li>
+<strong>"Sort by" dropdown</strong> (Only when in Newsfeed or Discussion tabs in <em>Main View</em> or when in <em>Connections Explorer</em>) - Selects from the different kinds of <em>Ranking</em> and <em>sorts</em> the currently displayed data by it.</li>
+<li>
+<strong>Current-Screen Search Box</strong> - Searches (by only showing matching elements) the currently displayed data.</li>
+<li>"New" menu button. Which opens a menu with:
+
+<ul>
+<li>"New Project"</li>
+<li>"New Goal"</li>
+<li>"New Requesite"</li>
+</ul>
+</li>
+<li>Other elements, dependent on context. Details in the specific place below.
+
+<ul>
+<li> In the <em>Connections Explorer</em> only
+
+<ul>
+<li>
+<em>Filter by</em> button when having some nodes selected</li>
+<li>
+<em>View switch button</em> between <em>Graph View</em> and <em>Node View</em>
+</li>
+</ul>
+</li>
+<li>In the <em>Newsfeed</em> only
+
+<ul>
+<li>Activity/Posts/Discussions checkboxes to select which to see</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Main Panel</strong></p>
+
+<ul>
+<li>Filtering / Search Rules (Several alternatives)
+
+<ul>
+<li>
+<strong>Filtering</strong> restricts view to data elements directly connected to the filter node (See data types and structure). Filtering is done through the <em>Connections Explorer</em>.<br>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>A <em>second alternative</em> is that browsing is like folders in <em>List View</em>, so that when you double click on a node (or highlight and "Enter" many nodes) you loose previous filtering.  </p>
+
+<p>The rest of the specification explores the first alternative</p>
+
+<ul>
+<li>Keyword filtering/search
+
+<ul>
+<li>Keyword Search in <em>Current-Screen Search Box</em> in the <em>Toolbar</em>. This search bar can also be selected by pressing Ctrl+F</li>
+<li><strong>Main view</strong></li>
+</ul>
+</li>
+<li>Section tabs
+
+<ul>
+<li>Newsfeed / Discussion</li>
+<li>Description/Wiki</li>
+</ul>
+</li>
+<li>Newsfeed
+
+<ul>
+<li>A <em>sorted</em> list of <em>Newsfeed activity</em>, <em>Discussion threads</em>, <em>Newsfeed posts</em> which can have associated <em>Likes</em>, <em>Shares</em> and <em>Comments</em>, shown in a social-newtork-like fashion</li>
+<li>Discussion threads</li>
+</ul>
+</li>
+</ul>
+
+<p>JeanMiCarter's note: I think this should be merged into newsfeed. The Newsfeed effectively contains everything that the current filter status allows. And you can have a big entry bar at the top to enter either a simple post or a question/beginning of a discussion thread. So in the newsfeed you can see new discussions appear as they are started. There should simply be a filter round the top to display only events/questions(discussions)/user status updates/comments or any combination of these.<br>
+guillefix's note: Ok, yeah.  </p>
+
+<pre><code>  - Each discussion thread can be opened if clicked on, and is composed of *discussion thread posts*, working similarly to a forum.
+  - Actions
+    - Vote discussion thread up or down (Once per user)
+    - Post a new *discussion thread post*
+      - If opened to you (as some discussion threads may be private)
+    - Open a new *discussion thread* (Button in *Toolbar*) - Will open the *New discussion thread page*
+    - Edit a *discussion thread post* - Requires certain priviledges
+- Actions
+  - Make a new *Newsfeed post* using the New post box (TBC)
+  - Like, Share or Comment on a Newsfeed post or activity.
+</code></pre>
+
+<ul>
+<li>Description/Wiki
+
+<ul>
+<li>Features:
+
+<ul>
+<li>The Wiki <em>Document</em> will have, as its base, the same features as a Wiki.</li>
+<li>A Requisites Plug-in which will automatically create a list of the requisites and allow to say if they have them, or if they are looking for them. It allows to add little description space for each requisite, in which it can also say how it is planned to be gotten. People can comment on these  to offer the requisite if they have them, for example.</li>
+<li>Other <strong>Project Management Plugins</strong> which should be researched.</li>
+</ul>
+</li>
+<li>Wiki-like collaborative (moderated) description of <em>Projects</em>, <em>Goals</em> and <em>Requesites</em>.</li>
+<li>It is structured in <strong>sections</strong>. Each of these sections can be connected to any number of <em>Goals</em>, <em>Projects</em> and <em>Requesites</em>, effectively working like tags. They also have one <em>Parent Node</em>, which is the <em>Node</em> with to which they primarily belong.</li>
+<li>The <em>sections</em> are structured by the editing users. They only have a definite structure relative to other <em>sections</em> of the same <em>Parent node</em>. The (well-structured) document formed by all the sections with the same <em>Parent node</em> is called the <em>Node Document</em>
+</li>
+<li>Sections have comments, initially, contracted which can be expanded to read.</li>
+<li>Display Rules
+
+<ul>
+<li>The document will be grouped in <strong>groups</strong> corresponding to the same <em>Parent Node</em>. The structure within a <em>group</em> is defined by the <em>Node Document</em>. The <em>groups</em> themselves are sorted by showing first the <em>Parent Node</em> corresponding to the last <em>Node Document</em> visited, if any. The rest of <em>groups</em> are sorted by their <em>Parent Node</em>, according to the <em>sorting</em>.</li>
+<li>If you are filtering only through one <em>Node</em>, this opens the <strong>Node Document View</strong>, in which the group corresponding to it is shown first. In this view, all the information about the project is shown, even some <em>other information</em> which isn't a <em>Wiki/Description section</em>
+</li>
+</ul>
+</li>
+<li>Actions
+
+<ul>
+<li>Edit (Button in <em>Toolbar</em>) - Requires certain privileges. Only the <em>Node Document</em> can be edited.</li>
+<li>Add comment to a section - Requires less or no privileges.</li>
+</ul>
+</li>
+<li>
+<strong>Connections Explorer</strong> (a.k.a. <strong>Expanded Connections Bar</strong>, a.k.a. <strong>Quest Explorer</strong> or <strong>QXplore</strong>)</li>
+</ul>
+</li>
+<li>A webapp to navigate and explore the data in the <em>Quest Explorer Categories</em>, which include individual data (<strong>Nodes</strong>) and <strong>Connections</strong>.</li>
+<li>
+<strong>List View</strong>
+
+<ul>
+<li>Contains three (scrollable column) sections:
+
+<ul>
+<li>Goals</li>
+<li>Projects - #To add: progress indicators (bars for e.g.)#</li>
+<li>Requesites</li>
+</ul>
+</li>
+<li>Display Rules
+
+<ul>
+<li>Filtering elements are shown on top and highlighted in a different colour</li>
+<li>The relationship (parent/child) of the filtering elements with the highlighted element is shown as an indentation of the filtering elements (To the left if parent; to the right if child) if the highlighted element isn't a filtering element. If you highlight a filtering element, all the rest indent to show the relation. If none, or more than one elements are highlighted this isn't shown.</li>
+</ul>
+</li>
+<li>Actions
+
+<ul>
+<li>New Project
+
+<ul>
+<li>
+<em>Toolbar-&gt;New-&gt;New Project</em> will bring you to the <em>New Project Submission Page</em>
+</li>
+<li>Also initiated when making a cross category connection, with the nodes involved in the new connection already included in the "New Project".</li>
+<li>If filter is applied, filtering nodes are automatically connected to new node, as children by default (this is later editable in <em>New Goal/RequirementSubmission Page</em>). If no filtering is applied, the goal/requirement is created without connections.</li>
+</ul>
+</li>
+<li>New Goals or Requirements
+
+<ul>
+<li>
+<em>Toolbar-&gt;New-&gt;New Goal/Requirement</em> will bring you to the <em>New Goal/RequirementSubmission Page</em>
+</li>
+<li>If filter is applied, filtering nodes are automatically connected to new node, as children by default (this is later editable in <em>New Goal/RequirementSubmission Page</em>). If no filtering is applied, the goal/requirement is created without connections.</li>
+</ul>
+</li>
+<li>Highlighting
+
+<ul>
+<li>Single left click to <em>highlight</em>
+</li>
+<li>"Shift"+click to select more than one element</li>
+</ul>
+</li>
+<li>Filtering
+
+<ul>
+<li>Double click to <em>filter</em> by element</li>
+<li>If more than one <em>node</em> is selected, one can click the "Filter by" button, to filter by all of them.</li>
+<li>Add new <em>node</em> to filter by in a textbox at the end of the row in each column</li>
+</ul>
+</li>
+<li>New Connections
+
+<ul>
+<li>Highlight two nodes
+
+<ul>
+<li>If you have two modes selected, the "Create New connection" button on the <em>Toolbar</em> will un-grey-out, and if clicked will create a new connection.</li>
+<li>If the connection is Intra-Category and (thus) hierarchical, there will be a little button to swap the direction of the arrow before clicking the "create New connection" button. By default, the first one you selected will be the <em>Parent Node</em>, and the second one the <em>Child Node</em>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>Graph View</strong>
+
+<ul>
+<li>Contains: A graphical visualization of <em>Nodes</em> and <em>Connections</em>
+</li>
+<li>Views - Switching between them is done through three checkboxes. The nodes of each category are placed on different regions (separated by dotted lines, for example).The allowed views are:
+
+<ul>
+<li>Single Category</li>
+<li>Goal+Project View</li>
+<li>Project+Requisites View</li>
+<li>Global View (Goals+Projects+Requirements)</li>
+</ul>
+</li>
+<li>Display Rules
+
+<ul>
+<li>Connections - They are represented by lines if non-hierarchical, and arrows if hierarchical.</li>
+<li>Nodes, and nodes within nodes
+
+<ul>
+<li>
+<em>Child Node</em> is contained within a <em>Parent Node</em> if they have a single Parent relationship.</li>
+<li>
+<em>Child Node</em> related to 2 or more <em>Parent Nodes</em> lies outside both parents but is still connected by arrows.</li>
+</ul>
+</li>
+<li>Minimum Node Size for Display (So new nodes may appear upon zooming) - Only nodes up to a certain size will be shown. This size will probably depend on the number of nodes that would appear if that size was chosen. An algorithm will have to be tested to avoid cluttering. I would propose the algorithm choosing the size by the area occupied by the nodes.<br>
+Additionally, cluttering may be avoided by "extending the map" if there are many nodes of the same size, so that exploring would require panning through it.</li>
+<li>Maximum displayed Connections per node (for e.g., 10 highest in the current <em>sorting</em>)
+
+<ul>
+<li>Maybe there's a way to navigate through further connections, maybe some "More connections" button will display the next 10 connections under the <em>sorting</em>.</li>
+</ul>
+</li>
+<li>Node Size dependent on current <em>sorting</em>.</li>
+</ul>
+</li>
+<li>Actions
+
+<ul>
+<li>New Project
+
+<ul>
+<li>
+<em>Toolbar-&gt;New-&gt;New Project</em> will bring you to the <em>New Project Submission Page</em>
+</li>
+<li>Also initiated when making a cross category connection, with the nodes involved in the new connection already included in the "New Project". If making connection to an empty space, obviously only one node will be initially connected to the "New Project".</li>
+<li>If filter is applied, filtering nodes are automatically connected to new node, as children by default (this is later editable in <em>New Goal/RequirementSubmission Page</em>). If no filtering is applied, the goal/requirement is created without connections.</li>
+</ul>
+</li>
+<li>New Goals or Requirements
+
+<ul>
+<li>
+<em>Toolbar-&gt;New-&gt;New Goal/Requirement</em> will bring you to the <em>New Goal/RequirementSubmission Page</em>
+</li>
+<li>If filter is applied, filtering nodes are automatically connected to new node, as children by default (this is later editable in <em>New Goal/RequirementSubmission Page</em>). If no filtering is applied, the goal/requirement is created without connections.</li>
+</ul>
+</li>
+<li>New Connections
+
+<ul>
+<li>Method 1: Drag-n-Drop across any node.
+
+<ul>
+<li>Drag existing node to another existing node establishes connection. For interCategory connections see Actions-&gt;New Project.</li>
+<li>Drag existing node to empty space establishes connection to a new node in destination space. This will prompt you with an input box to name the new node, unless the new node is in a different category, in which case the New Project page opens (See Actions-&gt;New Project).</li>
+</ul>
+</li>
+<li>Method 2: Highlight two nodes
+
+<ul>
+<li>If you have one node highlighted, and you highlight another one (single click) while having "Shift" pressed, you will be prompted by a pop up, asking you if you want to create a new connection between the two nodes.</li>
+<li>If the connection is Intra-Category and (thus) hierarchical, there will be a little button to swap the direction of the arrow. By default, the first one you selected will be the <em>Parent Node</em>, and the second one the <em>Child Node</em>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Single click to <em>highlight</em>
+</li>
+<li>Double click to <em>filter</em> by element</li>
+<li>Navigation
+
+<ul>
+<li>Left click and drag to pan around</li>
+<li>Scroll to zoom in and out. A <strong>zooming slider</strong> is also available.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>User Profile Page</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Connections Bar</strong></p>
+
+<ul>
+<li>Situated on the bottom</li>
+<li>Shows a truncated version of the List View of the Connections Explorer (Keeping the three column format, but listing horizontally to reduce space)</li>
+<li>Actions
+
+<ul>
+<li>Can navigate the list via two small arrows in the side of each column</li>
+<li>Single and double click perform same actions than in the expanded view</li>
+<li>Click an upwards arrow button to expand to the <em>Expanded Connections Bar</em>
+</li>
+<li>Add new <em>node</em> to filter by in a textbox at the end of the row in each column</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Preview Sidebar</strong></p>
+
+<ul>
+<li>Situated on the right. C.f. Wikipedia's</li>
+<li>Shows a summary of a node when highlighted.</li>
+</ul>
+
+<h3>
+<a id="data-types-and-structure" class="anchor" href="#data-types-and-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data types and structure</h3>
+
+<p><strong>Quest Explorer Categories</strong></p>
+
+<ul>
+<li><strong>Goals</strong></li>
+<li><strong>Projects</strong></li>
+<li><strong>Requirements</strong></li>
+</ul>
+
+<p>Other data types</p>
+
+<ul>
+<li>Newsfeed data
+
+<ul>
+<li>Newsfeed activity</li>
+<li>Newsfeed post (TBC)</li>
+<li>Discussion thread
+
+<ul>
+<li>Discussion thread post</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Description/Wiki section</li>
+<li>Comments and Likes</li>
+</ul>
+
+<p>Ranking/Sorting</p>
+
+<ul>
+<li>
+<strong>Ranking</strong>
+
+<ul>
+<li>Types
+
+<ul>
+<li>Newest</li>
+<li>Trending (Growth speed) TBC</li>
+<li>Popularity (Average Rating) (Maybe, takes into account rating of children nodes) TBC</li>
+</ul>
+</li>
+<li>Applies to: Newsfeed data, Discussion threads, QXplore data</li>
+</ul>
+</li>
+<li>The <strong>sorting</strong> is the name for the ordering in one instance of the app, which is done with one the three rankings. It is chosen through the <em>"Sort by" dropdown</em>
+</li>
+</ul>
+
+<p>Connections</p>
+
+<ul>
+<li>Intra-Category Connections
+
+<ul>
+<li>Hierarchical Connections (<strong>Parent Node</strong> -&gt; <strong>Child Node</strong>)</li>
+</ul>
+</li>
+<li>Cross-Category Connections
+
+<ul>
+<li>Non-Hierarchical</li>
+<li>Traced between <em>Goals</em> and <em>Projects</em>
+
+<ul>
+<li>A single <strong>Project</strong> can be connected to one or more Parent/Child <strong>Goals</strong>
+</li>
+</ul>
+</li>
+<li>Traced between <em>Projects</em> and <em>Requirements</em>
+
+<ul>
+<li>A single <strong>Project</strong> can be connected to one or more Parent/Child <strong>Goals</strong>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Other connections
+
+<ul>
+<li>The data types <em>Newsfeed data</em>, <em>Discussion thread</em> and <em>Description/Wiki section</em> can be (unhierachically) connected with <em>Nodes</em> (data from the <em>Quest Explorer Categories</em>)
+
+<ul>
+<li>
+<em>Description/Wiki sections</em> should be connected to at least one <em>Node</em>. And one and only one of the nodes should have the status of the <em>Parent Node</em>.</li>
+</ul>
+</li>
+<li>
+<em>Newsfeed data</em> can be connected to <em>Comments</em>, <em>Likes</em> and <em>Users</em>
+</li>
+<li>
+<em>Users</em> can be connected to <em>Discussion thread posts</em>, <em>Projects</em>, and <em>Newsfeed data</em>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>User data</p>
+
+<ul>
+<li>Profile data</li>
+<li>Priviledges</li>
+<li>Following Nodes</li>
+</ul>
+
+<h3>
+<a id="new-_____-page" class="anchor" href="#new-_____-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>New _____ page</h3>
+
+<p>Register page</p>
+
+<p>New Project/Goal/Requesite Submission Page</p>
+
+<p>New discussion thread page</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/n1k0d49/jera-stokosm">Jera-stokosm</a> is maintained by <a href="https://github.com/n1k0d49">n1k0d49</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-65879602-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
+
