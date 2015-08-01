@@ -1,0 +1,16 @@
+{% extends "stokosm/base.html" %}
+
+{% block content %}
+
+<h3>Edit link: {{ link.name }}</h3>
+
+<p>Project: {{ link.project }}</p>
+
+<form action="{% url 'stokosm:edit_link' link_id=link.id %}" method="post">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Submit" name="edit_link" />
+
+</form>
+
+{% endblock %}

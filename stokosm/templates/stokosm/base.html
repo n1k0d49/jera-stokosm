@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.css" %}" />
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap-responsive.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "jera/css/style.css" %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+    <script src="{% static "jera/js/d3.min.js" %}" charset="utf-8"></script>
+    <title>Jera</title>
+</head>
+
+<body>
+    <header id="header">
+		<h1 class="text-center"><a href="{% url 'stokosm:index' %}">Jera</a></h1>
+    </header>
+
+    <div class="container-fluid">
+    {% block content %}
+    {% endblock %}
+    </div>
+</body>
+</html>
